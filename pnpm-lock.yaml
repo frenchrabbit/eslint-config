@@ -273,6 +273,9 @@ importers:
       rolldown-plugin-require-cjs:
         specifier: catalog:dev
         version: 0.3.2(rolldown@1.0.0-beta.52)
+      semantic-release:
+        specifier: ^25.0.2
+        version: 25.0.2(typescript@5.9.3)
       tsdown:
         specifier: catalog:dev
         version: 0.17.0-beta.5(@typescript/native-preview@7.0.0-dev.20251202.1)(synckit@0.11.11)(typescript@5.9.3)
