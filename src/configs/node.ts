@@ -1,9 +1,10 @@
 import { pluginNode } from '../plugins'
+
 import type { Config } from '../types'
 
 export const node = (): Config[] => [
   {
-    name: 'sxzz/node',
+    name: 'frabbit/node',
     plugins: {
       node: pluginNode,
     },

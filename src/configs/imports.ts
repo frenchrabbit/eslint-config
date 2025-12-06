@@ -1,13 +1,11 @@
-import type { Config } from '../types'
-import { type FlatESLintConfig } from 'eslint-define-config'
-
 import { GLOB_MARKDOWN, GLOB_SRC, GLOB_SRC_EXT } from '../globs'
 import { pluginAntfu, pluginImport } from '../plugins'
 
+import type { Config } from '../types'
 
 export const imports = (): Config[] => [
   {
-    name: 'sxzz/imports',
+    name: 'frabbit/imports',
     plugins: {
       antfu: pluginAntfu,
       import: pluginImport,

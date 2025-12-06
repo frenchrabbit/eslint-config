@@ -1,4 +1,5 @@
 import { pluginPnpm } from '../plugins'
+
 import type { Config } from '../types'
 
 export async function pnpm(): Promise<Config[]> {
@@ -8,7 +9,7 @@ export async function pnpm(): Promise<Config[]> {
       languageOptions: {
         parser: await import('jsonc-eslint-parser'),
       },
-      name: 'sxzz/pnpm/package-json',
+      name: 'frabbit/pnpm/package-json',
       plugins: {
         pnpm: pluginPnpm,
       },
@@ -23,7 +24,7 @@ export async function pnpm(): Promise<Config[]> {
       languageOptions: {
         parser: await import('yaml-eslint-parser'),
       },
-      name: 'sxzz/pnpm/pnpm-workspace-yaml',
+      name: 'frabbit/pnpm/pnpm-workspace-yaml',
       plugins: {
         pnpm: pluginPnpm,
       },

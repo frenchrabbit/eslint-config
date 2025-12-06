@@ -1,4 +1,5 @@
 import baselineJs from 'eslint-plugin-baseline-js'
+
 import type { Config } from '../types'
 
 export interface BaselineOptions {
@@ -9,7 +10,7 @@ export interface BaselineOptions {
 
 export const baseline = (options: BaselineOptions = {}): Config[] => [
   {
-    name: 'sxzz/baseline',
+    name: 'frabbit/baseline',
     plugins: {
       'baseline-js': baselineJs,
     },

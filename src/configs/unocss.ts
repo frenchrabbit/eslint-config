@@ -5,7 +5,7 @@ export const unocss = async (): Promise<Config[]> => {
   return [
     {
       ...(unocss.configs.flat as any as Config),
-      name: 'sxzz/unocss',
+      name: 'frabbit/unocss',
     },
   ]
 }

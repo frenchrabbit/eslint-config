@@ -1,5 +1,6 @@
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs'
 import { parserJsonc, pluginJsonc } from '../plugins'
+
 import type { Config } from '../types'
 import type { Linter } from 'eslint'
 
@@ -9,7 +10,7 @@ export const jsonc = (): Config[] => [
     languageOptions: {
       parser: parserJsonc,
     },
-    name: 'sxzz/json',
+    name: 'frabbit/json',
     plugins: {
       jsonc: pluginJsonc as any,
     },

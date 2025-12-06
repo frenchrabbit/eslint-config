@@ -1,13 +1,14 @@
 import { pluginUnicorn } from '../plugins'
+
 import type { Config } from '../types'
 
 export const unicorn = (): Config[] => [
   {
     ...pluginUnicorn.configs.unopinionated,
-    name: 'sxzz/unicorn/unopinionated',
+    name: 'frabbit/unicorn/unopinionated',
   },
   {
-    name: 'sxzz/unicorn',
+    name: 'frabbit/unicorn',
     rules: {
       'unicorn/catch-error-name': 'error',
       'unicorn/consistent-empty-array-spread': 'error',

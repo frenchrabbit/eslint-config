@@ -1,11 +1,11 @@
-import { type FlatESLintConfig } from 'eslint-define-config'
+import { pluginSonarJS } from '../plugins'
+import type { Config } from '../types'
 
-import { pluginSonar } from '../plugins'
-
-export const sonarjs: FlatESLintConfig[] = [
+export const sonarjs = (): Config[] => [
   {
+    name: 'frabbit/sonarjs',
     plugins: {
-      sonarjs: pluginSonar,
+      sonarjs: pluginSonarJS,
     },
     rules: {
       'sonarjs/cognitive-complexity': 'error',

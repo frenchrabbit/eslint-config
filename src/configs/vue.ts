@@ -1,7 +1,8 @@
 import { GLOB_VUE } from '../globs'
 import { parserVue, pluginVue, tseslint } from '../plugins'
-import type { Config } from '../types'
+
 import { typescriptCore } from './typescript'
+import type { Config } from '../types'
 import type { ESLint } from 'eslint'
 
 export const reactivityTransform = (): Config[] => [
@@ -17,7 +18,7 @@ export const reactivityTransform = (): Config[] => [
         $toRef: 'readonly',
       },
     },
-    name: 'sxzz/vue/reactivity-transform',
+    name: 'frabbit/vue/reactivity-transform',
     plugins: {
       vue: pluginVue,
     },
@@ -33,7 +34,7 @@ const vueTs: Config[] = typescriptCore
     return {
       ...config,
       files: [GLOB_VUE],
-      name: `sxzz/vue/${config.name?.replace('sxzz/', '') || 'anonymous'}`,
+      name: `frabbit/vue/${config.name?.replace('frabbit/', '') || 'anonymous'}`,
     }
   })
 
@@ -56,7 +57,7 @@ export const vue = (): Config[] => [
         sourceType: 'module',
       },
     },
-    name: 'sxzz/vue',
+    name: 'frabbit/vue',
     plugins: {
       '@typescript-eslint': tseslint.plugin as ESLint.Plugin,
       vue: pluginVue,

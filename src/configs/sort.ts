@@ -5,7 +5,7 @@ import type { Config } from '../types'
 export const sortPackageJson = (): Config[] => [
   {
     files: ['**/package.json'],
-    name: 'sxzz/sort/package.json',
+    name: 'frabbit/sort/package.json',
     rules: {
       'jsonc/sort-array-values': [
         'error',
@@ -88,7 +88,7 @@ export const sortPackageJson = (): Config[] => [
 export const sortTsconfig = (): Config[] => [
   {
     files: ['**/[jt]sconfig.json', '**/[jt]sconfig.*.json'],
-    name: 'sxzz/sort/tsconfig',
+    name: 'frabbit/sort/tsconfig',
     rules: {
       'jsonc/sort-keys': [
         'error',
@@ -215,7 +215,7 @@ export const sortTsconfig = (): Config[] => [
 export const sortPnpmWorkspace = (): Config[] => [
   {
     files: ['**/pnpm-workspace.yaml'],
-    name: 'sxzz/sort/pnpm-workspace',
+    name: 'frabbit/sort/pnpm-workspace',
     rules: {
       'yml/sort-keys': [
         'error',
@@ -250,7 +250,7 @@ export const sortPnpmWorkspace = (): Config[] => [
 
 export const sortImports = (): Config[] => [
   {
-    name: 'sxzz/sort/imports',
+    name: 'frabbit/sort/imports',
     plugins: {
       perfectionist: pluginPerfectionist,
     },

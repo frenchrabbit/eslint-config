@@ -1,9 +1,10 @@
 import { pluginJsdoc } from '../plugins'
+
 import type { Config } from '../types'
 
 export const jsdoc = (): Config[] => [
   {
-    name: 'sxzz/jsdoc',
+    name: 'frabbit/jsdoc',
     plugins: {
       jsdoc: pluginJsdoc,
     },

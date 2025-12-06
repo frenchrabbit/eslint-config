@@ -28,6 +28,8 @@ import {
   unocss,
   vue,
   yml,
+  sonarjs,
+  security,
   type BaselineOptions,
 } from './configs'
 import { hasUnocss, hasVue } from './env'
@@ -42,6 +44,8 @@ export const presetJavaScript = (): Config[] => [
   ...comments(),
   ...imports(),
   ...unicorn(),
+  ...sonarjs(),
+  ...security(),
   ...node(),
   ...jsdoc(),
   ...regexp(),
@@ -104,8 +108,8 @@ export interface Options {
   vue?: boolean
 }
 
-/** `@sxzz`'s preset. */
-export function sxzz(
+/** `@frabbit`'s preset. */
+export function frabbit(
   options: Options = {},
   ...userConfigs: Awaitable<
     Arrayable<Config> | FlatConfigComposer<any, any> | Linter.Config[]
@@ -124,7 +128,7 @@ export function sxzz(
   const configs: Awaitable<Config[]>[] = [presetBasic(), yml(), presetJsonc()]
   if (enableBaseline) {
     configs.push(
-      baseline(typeof enableBaseline === 'object' ? enableBaseline : {}),
+      baseline(typeof enableBaseline === 'object' ? enableBaseline : {})
     )
   }
   if (enableVue) {
@@ -149,7 +153,7 @@ export function sxzz(
 
   const composer = new FlatConfigComposer<Config, ConfigNames>(
     ...configs,
-    ...(userConfigs as any),
+    ...(userConfigs as any)
   )
   return composer
 }

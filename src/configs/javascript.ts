@@ -1,5 +1,7 @@
 import globals from 'globals'
+
 import { configJs, pluginSxzz, pluginUnusedImports } from '../plugins'
+
 import type { Config } from '../types'
 
 export const restrictedSyntaxJs: string[] = [
@@ -8,7 +10,7 @@ export const restrictedSyntaxJs: string[] = [
 ]
 
 export const javascript = (): Config[] => [
-  { ...configJs.configs.recommended, name: 'sxzz/js/recommended' },
+  { ...configJs.configs.recommended, name: 'frabbit/js/recommended' },
   {
     languageOptions: {
       globals: {
@@ -24,7 +26,7 @@ export const javascript = (): Config[] => [
       },
       sourceType: 'module',
     },
-    name: 'sxzz/js',
+    name: 'frabbit/js',
     plugins: {
       sxzz: pluginSxzz,
       'unused-imports': pluginUnusedImports,

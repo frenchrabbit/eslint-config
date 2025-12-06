@@ -1,8 +1,5 @@
 # @frabbit/eslint-config [![npm](https://img.shields.io/npm/v/@frabbit/eslint-config.svg)](https://npmjs.com/package/@frabbit/eslint-config)
 
-[![npm version][npm-version-src]][npm-version-href]
-[![npm downloads][npm-downloads-src]][npm-downloads-href]
-[![Unit Test][unit-test-src]][unit-test-href]
 
 Flat ESLint config for JavaScript, TypeScript, Vue 2, Vue 3, Prettier.
 based on https://github.com/sxzz/eslint-config
@@ -64,7 +61,7 @@ import {
   // - UnoCSS support (`uno.config.ts` is required)
   // - Prettier support
   presetAll,
-} from '@sxzz/eslint-config'
+} from '@frabbit/eslint-config'
 
 export default presetAll
 ```

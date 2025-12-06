@@ -1,6 +1,7 @@
-import { sxzz } from './src/index'
+import type { FlatConfigComposer } from 'eslint-flat-config-utils'
+import { frabbit, type Config, type ConfigNames } from './src'
 
-export default sxzz({
+const _default: FlatConfigComposer<Config, ConfigNames> = frabbit({
   vue: true,
   pnpm: true,
 }).append(
@@ -19,5 +20,6 @@ export default sxzz({
   },
   {
     ignores: ['src/typegen.ts'],
-  },
+  }
 )
+export default _default

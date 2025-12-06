@@ -1,9 +1,10 @@
-import { type FlatESLintConfig } from 'eslint-define-config'
-
 import { pluginSecurity } from '../plugins'
 
-export const security: FlatESLintConfig[] = [
+import type { Config } from '../types'
+
+export const security = (): Config[] => [
   {
+    name: 'frabbit/security',
     plugins: {
       security: pluginSecurity,
     },

@@ -12,7 +12,7 @@ catalog:
 catalogs:
   dev:
     '@eslint/config-inspector': ^1.4.2
-    '@sxzz/prettier-config': ^2.2.6
+    '@frabbit/prettier-config': ^2.0.0
     '@types/node': ^24.10.1
     '@typescript/native-preview': 7.0.0-dev.20251202.1
     bumpp: ^10.3.2
