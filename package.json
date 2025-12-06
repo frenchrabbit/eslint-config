@@ -88,8 +88,6 @@
   "devDependencies": {
     "@eslint/config-inspector": "catalog:dev",
     "@frabbit/prettier-config": "catalog:dev",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
     "@types/node": "catalog:dev",
     "@typescript/native-preview": "catalog:dev",
     "@unocss/eslint-plugin": "catalog:plugins",
@@ -98,7 +96,6 @@
     "eslint-typegen": "catalog:dev",
     "prettier": "catalog:dev",
     "rolldown-plugin-require-cjs": "catalog:dev",
-    "semantic-release": "^25.0.2",
     "tsdown": "catalog:dev",
     "typescript": "catalog:dev",
     "unrun": "catalog:dev"
