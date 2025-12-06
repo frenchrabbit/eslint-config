@@ -1,26 +1,10 @@
-import tsPlugin from '@typescript-eslint/eslint-plugin'
-import { type FlatESLintConfig, type Rules } from 'eslint-define-config'
-import { getPackageInfoSync } from 'local-pkg'
+import { GLOB_VUE } from '../globs'
+import { parserVue, pluginVue, tseslint } from '../plugins'
+import type { Config } from '../types'
+import { typescriptCore } from './typescript'
+import type { ESLint } from 'eslint'
 
-import { GLOB_NUXT_LAYOUTS, GLOB_NUXT_PAGE, GLOB_VUE } from '../globs'
-import { parserVue, pluginVue } from '../plugins'
-
-import { typescript } from './typescript'
-
-export function getVueVersion() {
-  const pkg = getPackageInfoSync('vue', { paths: [process.cwd()] })
-  if (
-    pkg &&
-    typeof pkg.version === 'string' &&
-    !Number.isNaN(+pkg.version[0])
-  ) {
-    return +pkg.version[0]
-  }
-  return 3
-}
-const isVue3 = getVueVersion() === 3
-
-export const reactivityTransform: FlatESLintConfig[] = [
+export const reactivityTransform = (): Config[] => [
   {
     languageOptions: {
       globals: {
@@ -33,6 +17,7 @@ export const reactivityTransform: FlatESLintConfig[] = [
         $toRef: 'readonly',
       },
     },
+    name: 'sxzz/vue/reactivity-transform',
     plugins: {
       vue: pluginVue,
     },
@@ -42,203 +27,22 @@ export const reactivityTransform: FlatESLintConfig[] = [
   },
 ]
 
-const vueCustomRules: Partial<Rules> = {
-  'vue/attributes-order': [
-    'warn',
-    {
-      alphabetical: false,
-      order: [
-        'DEFINITION',
-        'LIST_RENDERING',
-        'CONDITIONALS',
-        'RENDER_MODIFIERS',
-        'GLOBAL',
-        'UNIQUE',
-        'TWO_WAY_BINDING',
-        'OTHER_DIRECTIVES',
-        'OTHER_ATTR',
-        'EVENTS',
-        'CONTENT',
-      ],
-    },
-  ],
-  'vue/block-order': [
-    'error',
-    {
-      order: [
-        'docs',
-        'script[setup]',
-        'template',
-        'script:not([setup])',
-        'style',
-      ],
-    },
-  ],
-  'vue/component-definition-name-casing': ['error', 'kebab-case'],
-  'vue/component-name-in-template-casing': [
-    'error',
-    'kebab-case',
-    {
-      ignores: [],
-      registeredComponentsOnly: false,
-    },
-  ],
-  'vue/component-options-name-casing': ['error', 'PascalCase'],
-  'vue/component-tags-order': 'off',
+const vueTs: Config[] = typescriptCore
+  .filter((config) => config.name !== 'typescript-eslint/base')
+  .map((config) => {
+    return {
+      ...config,
+      files: [GLOB_VUE],
+      name: `sxzz/vue/${config.name?.replace('sxzz/', '') || 'anonymous'}`,
+    }
+  })
 
-  'vue/custom-event-name-casing': ['error', 'camelCase'],
-  'vue/eqeqeq': ['error', 'smart'],
-  'vue/html-self-closing': [
-    'error',
-    {
-      html: {
-        component: 'always',
-        normal: 'always',
-        void: 'always',
-      },
-      math: 'always',
-      svg: 'always',
-    },
-  ],
-  'vue/match-component-file-name': [
-    'error',
-    {
-      extensions: ['vue'],
-      shouldMatchCase: false,
-    },
-  ],
-  'vue/match-component-import-name': 'warn',
-  'vue/max-attributes-per-line': 'off',
-  'vue/multi-word-component-names': 'error',
-  'vue/no-boolean-default': ['error', 'default-false'],
-  'vue/no-constant-condition': 'warn',
-  'vue/no-duplicate-attr-inheritance': 'warn',
-  'vue/no-empty-pattern': 'error',
-  'vue/no-irregular-whitespace': 'error',
-  'vue/no-loss-of-precision': 'error',
-  'vue/no-multiple-objects-in-class': 'error',
-  'vue/no-potential-component-option-typo': [
-    'error',
-    {
-      presets: ['vue', 'nuxt'],
-      threshold: 5,
-    },
-  ],
-  'vue/no-reserved-component-names': 'error',
-  'vue/no-static-inline-styles': [
-    'error',
-    {
-      allowBinding: false,
-    },
-  ],
-  'vue/no-this-in-before-route-enter': 'error',
-  // 'vue/no-restricted-static-attribute': [
-  //   'error',
-  //   {
-  //     key: 'stlye',
-  //     message: 'Using "stlye" is not allowed. Use "style" instead.',
-  //   },
-  // ],
-  // 'vue/no-template-target-blank': [
-  //   'error',
-  //   {
-  //     allowReferrer: true,
-  //     enforceDynamicLinks: 'always',
-  //   },
-  // ],
-  'vue/no-undef-components': [
-    'error',
-    {
-      ignorePatterns: ['lazy-hydrate', 'no-ssr', 'client-only'],
-    },
-  ],
+const recommendedRules = pluginVue.configs['flat/recommended']
+  .map((c) => c.rules)
+  .reduce((acc, c) => ({ ...acc, ...c }), {}) as any
 
-  'vue/no-unsupported-features': [
-    'error',
-    {
-      ignores: [],
-      version: '^2.7.14',
-    },
-  ],
-  'vue/no-unused-properties': [
-    'error',
-    {
-      groups: ['props', 'data', 'computed', 'methods', 'setup'],
-      ignorePublicMembers: true,
-    },
-  ],
-  'vue/no-unused-refs': 'error',
-  'vue/no-useless-concat': 'warn',
-  'vue/no-useless-mustaches': [
-    'warn',
-    {
-      ignoreIncludesComment: true,
-      ignoreStringEscape: true,
-    },
-  ],
-  'vue/no-useless-v-bind': [
-    'warn',
-    {
-      ignoreIncludesComment: true,
-      ignoreStringEscape: true,
-    },
-  ],
-  'vue/no-v-html': 'off',
-  'vue/object-curly-spacing': 'error',
-  'vue/object-shorthand': [
-    'error',
-    'always',
-    {
-      avoidQuotes: true,
-      ignoreConstructors: false,
-    },
-  ],
-  'vue/padding-line-between-blocks': ['error', 'always'],
-  'vue/prefer-prop-type-boolean-first': 'error',
-  'vue/prefer-separate-static-class': 'error',
-  'vue/prefer-template': 'error',
-  'vue/prefer-true-attribute-shorthand': 'warn',
-  'vue/prop-name-casing': ['error', 'camelCase'],
-  'vue/require-default-prop': 'error',
-  'vue/require-prop-types': 'error',
-  // TODO: отступы в <script>
-  'vue/script-indent': [
-    'error',
-    2,
-    {
-      baseIndent: 1,
-      ignores: [],
-      switchCase: 1,
-    },
-  ],
-  'vue/space-in-parens': 'error',
-  'vue/static-class-names-order': 'off',
-  'vue/v-on-handler-style': [
-    'error',
-    ['method', 'inline-function'], // ["method", "inline-function"] | ["method", "inline"] | "inline-function" | "inline"
-    {
-      ignoreIncludesComment: true,
-    },
-  ],
-  'vue/valid-v-bind-sync': 'error',
-  'vue/valid-v-slot': 'error',
-}
-
-const vue3Rules: Rules = {
-  ...pluginVue.configs.base.rules,
-  ...pluginVue.configs['vue3-essential'].rules,
-  ...pluginVue.configs['vue3-strongly-recommended'].rules,
-  ...pluginVue.configs['vue3-recommended'].rules,
-}
-
-const vue2Rules: Rules = {
-  ...pluginVue.configs.base.rules,
-  ...pluginVue.configs.essential.rules,
-  ...pluginVue.configs['strongly-recommended'].rules,
-  ...pluginVue.configs.recommended.rules,
-}
-
-export const vue: FlatESLintConfig[] = [
+export const vue = (): Config[] => [
+  ...vueTs,
   {
     files: [GLOB_VUE],
     languageOptions: {
@@ -248,33 +52,63 @@ export const vue: FlatESLintConfig[] = [
           jsx: true,
         },
         extraFileExtensions: ['.vue'],
-        parser: '@typescript-eslint/parser',
+        parser: tseslint.parser,
         sourceType: 'module',
       },
     },
+    name: 'sxzz/vue',
     plugins: {
-      '@typescript-eslint': tsPlugin,
+      '@typescript-eslint': tseslint.plugin as ESLint.Plugin,
       vue: pluginVue,
     },
     processor: pluginVue.processors['.vue'],
     rules: {
-      ...typescript[0].rules,
-    },
-  },
-  {
-    plugins: {
-      vue: pluginVue,
-    },
-    rules: {
-      ...(isVue3 ? vue3Rules : vue2Rules),
-      ...vueCustomRules,
-    },
-  },
-  ...reactivityTransform,
-  {
-    files: [GLOB_NUXT_PAGE, GLOB_NUXT_LAYOUTS, 'app.vue'],
-    rules: {
+      ...recommendedRules,
+
+      'vue/block-order': ['error', { order: ['script', 'template', 'style'] }],
+      'vue/custom-event-name-casing': ['error', 'camelCase'],
+      'vue/eqeqeq': ['error', 'smart'],
+      'vue/html-self-closing': [
+        'error',
+        {
+          html: {
+            component: 'always',
+            normal: 'always',
+            void: 'any',
+          },
+          math: 'always',
+          svg: 'always',
+        },
+      ],
+      'vue/max-attributes-per-line': 'off',
+
       'vue/multi-word-component-names': 'off',
+      'vue/no-constant-condition': 'warn',
+      'vue/no-empty-pattern': 'error',
+      'vue/no-loss-of-precision': 'error',
+      'vue/no-ref-as-operand': 'off',
+      'vue/no-unused-refs': 'error',
+      'vue/no-useless-v-bind': 'error',
+
+      'vue/no-v-html': 'off',
+      'vue/object-shorthand': [
+        'error',
+        'always',
+        {
+          avoidQuotes: true,
+          ignoreConstructors: false,
+        },
+      ],
+      'vue/one-component-per-file': 'off',
+      'vue/padding-line-between-blocks': ['error', 'always'],
+      'vue/prefer-template': 'error',
+      'vue/require-default-prop': 'off',
+      'vue/require-prop-types': 'off',
+      'vue/return-in-computed-property': [
+        'error',
+        { treatUndefinedAsUnspecified: false },
+      ],
     },
   },
+  ...reactivityTransform(),
 ]

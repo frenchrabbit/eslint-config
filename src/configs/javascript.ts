@@ -1,15 +1,19 @@
-import { type FlatESLintConfig } from 'eslint-define-config'
 import globals from 'globals'
+import { configJs, pluginSxzz, pluginUnusedImports } from '../plugins'
+import type { Config } from '../types'
 
-import { isInEditor } from '../env'
-import { pluginUnusedImports } from '../plugins'
+export const restrictedSyntaxJs: string[] = [
+  'ForInStatement',
+  'LabeledStatement',
+]
 
-export const javascript: FlatESLintConfig[] = [
+export const javascript = (): Config[] => [
+  { ...configJs.configs.recommended, name: 'sxzz/js/recommended' },
   {
     languageOptions: {
       globals: {
         ...globals.browser,
-        ...globals.es2021,
+        ...globals.es2026,
         ...globals.node,
       },
       parserOptions: {
@@ -20,97 +24,29 @@ export const javascript: FlatESLintConfig[] = [
       },
       sourceType: 'module',
     },
+    name: 'sxzz/js',
     plugins: {
+      sxzz: pluginSxzz,
       'unused-imports': pluginUnusedImports,
     },
     rules: {
       'array-callback-return': 'error',
       'block-scoped-var': 'error',
-      camelcase: [
-        'error',
-        {
-          ignoreDestructuring: true,
-          ignoreImports: true,
-          properties: 'always',
-        },
-      ],
-      'class-methods-use-this': 'error',
-      'constructor-super': 'error',
       'dot-notation': 'warn',
       eqeqeq: ['error', 'smart'],
-      'for-direction': 'error',
-      'getter-return': 'error',
       'no-alert': 'warn',
-      'no-async-promise-executor': 'error',
-      'no-await-in-loop': 'error',
-      'no-case-declarations': 'error',
-      'no-class-assign': 'error',
-      'no-compare-neg-zero': 'error',
-      'no-cond-assign': 'error',
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
-      'no-const-assign': 'error',
-      'no-constant-condition': 'error',
-      'no-control-regex': 'error',
+      'no-console': ['warn', { allow: ['warn', 'error', 'info', 'clear'] }],
       'no-debugger': 'warn',
-      'no-delete-var': 'error',
-      'no-dupe-args': 'error',
-      'no-dupe-class-members': 'error',
-      'no-dupe-else-if': 'error',
-      'no-dupe-keys': 'error',
-      'no-duplicate-case': 'error',
       'no-duplicate-imports': 'error',
-      'no-else-return': 'error',
       'no-empty': ['error', { allowEmptyCatch: true }],
-      'no-empty-character-class': 'error',
-      'no-empty-pattern': 'error',
-      'no-ex-assign': 'error',
-      'no-extend-native': 'error',
-      'no-extra-bind': 'error',
-      'no-extra-boolean-cast': 'error',
-      'no-extra-label': 'error',
-      'no-fallthrough': ['warn', { commentPattern: 'break[\\s\\w]*omitted' }],
-      'no-func-assign': 'error',
-      'no-global-assign': 'error',
-      'no-import-assign': 'error',
-      'no-inner-declarations': 'error',
-      'no-invalid-regexp': 'error',
-      'no-irregular-whitespace': 'error',
-      'no-lonely-if': 'error',
-      'no-loop-func': 'error',
-      'no-loss-of-precision': 'error',
-      'no-misleading-character-class': 'error',
-      'no-mixed-spaces-and-tabs': 'error',
-      'no-multi-str': 'error',
-      'no-new-symbol': 'error',
-      'no-nonoctal-decimal-escape': 'error',
-      'no-obj-calls': 'error',
-      'no-octal': 'error',
-      'no-octal-escape': 'error',
-      'no-param-reassign': 'error',
-      'no-proto': 'error',
-      'no-prototype-builtins': 'error',
-      'no-redeclare': 'error',
-      'no-regex-spaces': 'error',
-      'no-restricted-syntax': [
-        'error',
-        'ForInStatement',
-        'LabeledStatement',
-        'WithStatement',
+      'no-fallthrough': [
+        'warn',
+        { commentPattern: String.raw`break[\s\w]*omitted` },
       ],
-      'no-return-await': 'warn',
-      'no-self-assign': 'error',
-      'no-setter-return': 'error',
-      'no-shadow-restricted-names': 'error',
-      'no-sparse-arrays': 'error',
-      'no-this-before-super': 'error',
-      'no-undef': 'error',
-      'no-undef-init': 'error',
-      'no-unexpected-multiline': 'error',
-      'no-unneeded-ternary': 'error',
-      'no-unreachable': 'error',
-      'no-unsafe-finally': 'error',
-      'no-unsafe-negation': 'error',
-      'no-unsafe-optional-chaining': 'error',
+      'no-inner-declarations': 'error',
+      'no-lonely-if': 'error',
+      'no-multi-str': 'error',
+      'no-restricted-syntax': ['error', ...restrictedSyntaxJs],
       'no-unused-expressions': [
         'error',
         {
@@ -119,23 +55,19 @@ export const javascript: FlatESLintConfig[] = [
           allowTernary: true,
         },
       ],
-      'no-unused-labels': 'error',
-
       'no-unused-vars': 'off',
-      'no-useless-backreference': 'error',
       'no-useless-call': 'error',
-
-      'no-useless-catch': 'error',
-      'no-useless-escape': 'error',
-
-      'no-useless-return': 'error',
+      'no-useless-computed-key': 'error',
+      'no-useless-constructor': 'error',
+      'no-useless-rename': 'error',
+      'no-var': 'error',
       'no-void': 'error',
-      'no-with': 'error',
       'object-shorthand': [
         'error',
         'always',
         { avoidQuotes: true, ignoreConstructors: false },
       ],
+      'one-var': ['error', { initialized: 'never' }],
       'prefer-arrow-callback': [
         'error',
         { allowNamedFunctions: false, allowUnboundThis: true },
@@ -149,22 +81,10 @@ export const javascript: FlatESLintConfig[] = [
       'prefer-rest-params': 'error',
       'prefer-spread': 'error',
       'prefer-template': 'error',
-      'require-atomic-updates': 'error',
       'require-await': 'error',
-
-      'require-yield': 'error',
-      'sort-imports': [
-        'error',
-        {
-          allowSeparatedGroups: false,
-          ignoreCase: false,
-          ignoreDeclarationSort: true,
-          ignoreMemberSort: false,
-          memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-        },
-      ],
+      'sxzz/prefer-string-function': 'warn',
       'unicode-bom': ['error', 'never'],
-      'unused-imports/no-unused-imports': isInEditor ? 'off' : 'error',
+      'unused-imports/no-unused-imports': 'warn',
       'unused-imports/no-unused-vars': [
         'error',
         { args: 'after-used', ignoreRestSiblings: true },
@@ -175,19 +95,6 @@ export const javascript: FlatESLintConfig[] = [
       ],
       'valid-typeof': ['error', { requireStringLiterals: true }],
       'vars-on-top': 'error',
-      'wrap-iife': ['error', 'any', { functionPrototypeMethods: true }],
-    },
-  },
-  {
-    files: ['**/scripts/*', '**/cli.*'],
-    rules: {
-      'no-console': 'off',
-    },
-  },
-  {
-    files: ['**/*.{test,spec}.js?(x)'],
-    rules: {
-      'no-unused-expressions': 'off',
     },
   },
 ]

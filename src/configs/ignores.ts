@@ -1,5 +1,14 @@
-import { type FlatESLintConfig } from 'eslint-define-config'
-
 import { GLOB_EXCLUDE } from '../globs'
+import { pluginIgnore } from '../plugins'
+import type { Config } from '../types'
 
-export const ignores: FlatESLintConfig[] = [{ ignores: GLOB_EXCLUDE }]
+export const ignores = (): Config[] => [
+  {
+    ignores: GLOB_EXCLUDE,
+    name: 'sxzz/global-ignores',
+  },
+  {
+    ...pluginIgnore({ strict: false }),
+    name: 'sxzz/gitignore',
+  },
+]

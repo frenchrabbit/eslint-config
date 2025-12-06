@@ -2,10 +2,10 @@ export const GLOB_SRC_EXT = '?([cm])[jt]s?(x)'
 export const GLOB_SRC = '**/*.?([cm])[jt]s?(x)'
 
 export const GLOB_JS = '**/*.?([cm])js'
-export const GLOB_JSX = '**/*.?([cm])jsx'
+export const GLOB_JSX = '**/*.jsx'
 
 export const GLOB_TS = '**/*.?([cm])ts'
-export const GLOB_TSX = '**/*.?([cm])tsx'
+export const GLOB_TSX = '**/*.tsx'
 
 export const GLOB_STYLE = '**/*.{c,le,sc}ss'
 export const GLOB_CSS = '**/*.css'
@@ -24,7 +24,7 @@ export const GLOB_NUXT_LAYOUTS = 'layouts/**/*.vue'
 export const GLOB_YAML = '**/*.y?(a)ml'
 export const GLOB_HTML = '**/*.htm?(l)'
 
-export const GLOB_ALL_SRC = [
+export const GLOB_ALL_SRC: string[] = [
   GLOB_SRC,
   GLOB_STYLE,
   GLOB_JSON,
@@ -39,17 +39,18 @@ export const GLOB_ALL_SRC = [
 
 export const GLOB_NODE_MODULES = '**/node_modules' as const
 export const GLOB_DIST = '**/dist' as const
-export const GLOB_LOCKFILE = [
+export const GLOB_LOCKFILE: string[] = [
   '**/package-lock.json',
   '**/yarn.lock',
   '**/pnpm-lock.yaml',
+  '**/bun.lockb',
 ]
-export const GLOB_EXCLUDE = [
+export const GLOB_EXCLUDE: string[] = [
   GLOB_NODE_MODULES,
   GLOB_DIST,
   ...GLOB_LOCKFILE,
 
-  '**/output',
+  'output',
   '**/coverage',
   '**/temp',
   '**/fixtures',
@@ -60,6 +61,7 @@ export const GLOB_EXCLUDE = [
   '**/.idea',
   '**/.output',
   '**/.vite-inspect',
+  '**/.nitro',
 
   '**/CHANGELOG*.md',
   '**/*.min.*',

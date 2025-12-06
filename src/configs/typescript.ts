@@ -1,69 +1,78 @@
-import { type FlatESLintConfig } from 'eslint-define-config'
+import { defineConfig } from 'eslint/config'
+import { GLOB_JS, GLOB_TS, GLOB_TSX } from '../globs'
+import { tseslint } from '../plugins'
+import type { Rules } from '../typegen'
+import type { Config } from '../types'
+import { restrictedSyntaxJs } from './javascript'
 
-import { GLOB_TS, GLOB_TSX } from '../globs'
-import { parserTypeScript, pluginAntfu, pluginTypeScript } from '../plugins'
-
-export const typescript: FlatESLintConfig[] = [
-  {
-    files: [GLOB_TS, GLOB_TSX],
-    languageOptions: {
-      parser: parserTypeScript,
-      parserOptions: {
-        sourceType: 'module',
+export const typescriptCore: Config[] = defineConfig({
+  extends: [...tseslint.configs.recommended],
+  files: [GLOB_TS, GLOB_TSX],
+  name: 'sxzz/typescript',
+  rules: {
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/consistent-type-assertions': [
+      'error',
+      {
+        assertionStyle: 'as',
+        objectLiteralTypeAssertions: 'allow-as-parameter',
       },
-    },
-    plugins: {
-      '@typescript-eslint': pluginTypeScript,
-      antfu: pluginAntfu,
-    },
-    rules: {
-      ...pluginTypeScript.configs['eslint-recommended'].overrides![0].rules,
-      ...pluginTypeScript.configs.strict.rules,
+    ],
+    '@typescript-eslint/consistent-type-imports': [
+      'error',
+      { disallowTypeAnnotations: false, fixStyle: 'inline-type-imports' },
+    ],
+    '@typescript-eslint/method-signature-style': ['error', 'property'], // https://www.totaltypescript.com/method-shorthand-syntax-considered-harmful
+    '@typescript-eslint/no-empty-object-type': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-import-type-side-effects': 'error',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-redeclare': 'error',
+    '@typescript-eslint/no-unsafe-function-type': 'off',
+    '@typescript-eslint/no-unused-expressions': [
+      'error',
+      {
+        allowShortCircuit: true,
+        allowTaggedTemplates: true,
+        allowTernary: true,
+      },
+    ],
 
-      '@typescript-eslint/ban-ts-comment': 'off',
-      '@typescript-eslint/ban-types': 'off',
-      '@typescript-eslint/consistent-type-assertions': [
-        'error',
-        {
-          assertionStyle: 'as',
-          objectLiteralTypeAssertions: 'allow-as-parameter',
-        },
-      ],
-      '@typescript-eslint/consistent-type-imports': [
-        'error',
-        { disallowTypeAnnotations: false, fixStyle: 'inline-type-imports' },
-      ],
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/no-redeclare': 'error',
+    // handled by unused-imports/no-unused-imports
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-useless-constructor': 'error',
+    '@typescript-eslint/prefer-as-const': 'warn',
+    '@typescript-eslint/prefer-literal-enum-member': [
+      'error',
+      { allowBitwiseExpressions: true },
+    ],
 
-      // handled by unused-imports/no-unused-imports
-      '@typescript-eslint/no-unused-vars': 'off',
+    'no-restricted-syntax': [
+      'error',
+      ...restrictedSyntaxJs,
+      'TSEnumDeclaration[const=true]',
+    ],
+  } satisfies Rules,
+})
 
-      '@typescript-eslint/prefer-as-const': 'warn',
+export const typescript = (): Config[] => [
+  ...typescriptCore,
 
-      'no-restricted-syntax': ['error', 'TSEnumDeclaration[const=true]'],
-    },
-  },
   {
     files: ['**/*.d.ts'],
+    name: 'sxzz/typescript/dts-rules',
     rules: {
       'eslint-comments/no-unlimited-disable': 'off',
       'import/no-duplicates': 'off',
+      'no-restricted-syntax': 'off',
       'unused-imports/no-unused-vars': 'off',
     },
   },
   {
-    files: ['**/*.{test,spec}.ts?(x)'],
-    rules: {
-      'no-unused-expressions': 'off',
-    },
-  },
-  {
-    files: ['**/*.js', '**/*.cjs'],
+    files: [GLOB_JS, '**/*.cjs'],
+    name: 'sxzz/typescript/cjs-rules',
     rules: {
       '@typescript-eslint/no-require-imports': 'off',
-      '@typescript-eslint/no-var-requires': 'off',
     },
   },
 ]

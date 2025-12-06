@@ -1,10 +1,13 @@
+import type { Config } from '../types'
 import { type FlatESLintConfig } from 'eslint-define-config'
 
 import { GLOB_MARKDOWN, GLOB_SRC, GLOB_SRC_EXT } from '../globs'
 import { pluginAntfu, pluginImport } from '../plugins'
 
-export const imports: FlatESLintConfig[] = [
+
+export const imports = (): Config[] => [
   {
+    name: 'sxzz/imports',
     plugins: {
       antfu: pluginAntfu,
       import: pluginImport,
@@ -41,6 +44,7 @@ export const imports: FlatESLintConfig[] = [
     },
   },
   {
+    // TODO: remove
     files: [
       `**/*config*.${GLOB_SRC_EXT}`,
       `**/views/${GLOB_SRC}`,
