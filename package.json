@@ -88,6 +88,8 @@
   "devDependencies": {
     "@eslint/config-inspector": "catalog:dev",
     "@frabbit/prettier-config": "catalog:dev",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@types/node": "catalog:dev",
     "@typescript/native-preview": "catalog:dev",
     "@unocss/eslint-plugin": "catalog:plugins",

@@ -28,7 +28,7 @@ jobs:
       - run: pnpm i
 
       - name: Release
-        run: npx semantic-release -p @semantic-release/git -p @semantic-release/git -p @semantic-release/changelog -p @semantic-release/exec --branches main
+        run: npx semantic-release -p @semantic-release/git -p  -p @semantic-release/changelog -p @semantic-release/exec --branches main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
