@@ -1,19 +1,19 @@
 {
   "name": "@frabbit/eslint-config",
+  "type": "module",
   "version": "7.4.5",
   "packageManager": "pnpm@10.24.0",
   "description": "ESLint config for @frabbit.",
-  "type": "module",
   "author": "Kevin Deng <sxzz@sxzz.moe>",
   "license": "MIT",
-  "homepage": "https://github.com/frabbit/eslint-config#readme",
-  "bugs": {
-    "url": "https://github.com/frabbit/eslint-config/issues"
-  },
   "funding": "https://github.com/sponsors/sxzz",
+  "homepage": "https://github.com/frabbit/eslint-config#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/frenchrabbit/eslint-config.git"
+  },
+  "bugs": {
+    "url": "https://github.com/frabbit/eslint-config/issues"
   },
   "exports": {
     ".": "./dist/index.mjs",
@@ -71,8 +71,8 @@
     "eslint-plugin-pnpm": "catalog:plugins",
     "eslint-plugin-prettier": "catalog:plugins",
     "eslint-plugin-regexp": "catalog:plugins",
-    "eslint-plugin-security": "^3.0.1",
-    "eslint-plugin-sonarjs": "^3.0.5",
+    "eslint-plugin-security": "catalog:",
+    "eslint-plugin-sonarjs": "catalog:",
     "eslint-plugin-sxzz": "catalog:plugins",
     "eslint-plugin-unicorn": "catalog:plugins",
     "eslint-plugin-unused-imports": "catalog:plugins",

@@ -1,8 +1,10 @@
 import { writeFile } from 'node:fs/promises'
 import { styleText } from 'node:util'
+
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core'
 import { builtinRules } from 'eslint/use-at-your-own-risk'
-import { presetAll } from '../src/presets'
+
+import { presetAll } from '../src'
 
 const configs = [
   ...(await presetAll()),

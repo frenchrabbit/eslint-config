@@ -6,6 +6,8 @@ catalog:
   '@eslint/js': ^9.39.1
   eslint: ^9.39.1
   eslint-flat-config-utils: ^2.1.4
+  eslint-plugin-security: ^3.0.1
+  eslint-plugin-sonarjs: ^3.0.5
   globals: ^16.5.0
   local-pkg: ^1.1.2
 

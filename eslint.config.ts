@@ -1,5 +1,6 @@
-import type { FlatConfigComposer } from 'eslint-flat-config-utils'
 import { frabbit, type Config, type ConfigNames } from './src'
+
+import type { FlatConfigComposer } from 'eslint-flat-config-utils'
 
 const _default: FlatConfigComposer<Config, ConfigNames> = frabbit({
   vue: true,

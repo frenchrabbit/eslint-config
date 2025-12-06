@@ -1,6 +1,5 @@
 # @frabbit/eslint-config [![npm](https://img.shields.io/npm/v/@frabbit/eslint-config.svg)](https://npmjs.com/package/@frabbit/eslint-config)
 
-
 Flat ESLint config for JavaScript, TypeScript, Vue 2, Vue 3, Prettier.
 based on https://github.com/sxzz/eslint-config
 
@@ -30,6 +29,7 @@ Require Node.js >= 20.0.0, and ESLint >= 9.5.0.
 
 ```js
 import { frabbit } from '@frabbit/eslint-config'
+
 export default frabbit(
   // Features: it'll detect installed dependency and enable necessary features automatically
   {
@@ -40,7 +40,7 @@ export default frabbit(
   },
   [
     /* your custom config */
-  ],
+  ]
 ).removeRules('foo/bar') // see more in https://github.com/antfu/eslint-flat-config-utils
 ```
 
@@ -75,4 +75,3 @@ Most of the rules are the same, but there are some differences:
 - Use [Prettier](https://prettier.io/) instead of [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic).
 - React and Svelte are not supported.
 - Maybe stricter and simpler.
-

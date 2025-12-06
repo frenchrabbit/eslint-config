@@ -1,4 +1,5 @@
 import { pluginSonarJS } from '../plugins'
+
 import type { Config } from '../types'
 
 export const sonarjs = (): Config[] => [
@@ -27,7 +28,6 @@ export const sonarjs = (): Config[] => [
       'sonarjs/no-inverted-boolean-check': 'off',
       'sonarjs/no-nested-switch': 'error',
       'sonarjs/no-nested-template-literals': 'error',
-      'sonarjs/no-one-iteration-loop': 'error',
       'sonarjs/no-redundant-boolean': 'error',
       'sonarjs/no-redundant-jump': 'error',
       'sonarjs/no-same-line-conditional': 'error',

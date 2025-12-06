@@ -3,6 +3,7 @@ import {
   type Arrayable,
   type Awaitable,
 } from 'eslint-flat-config-utils'
+
 import {
   baseline,
   command,
@@ -18,6 +19,8 @@ import {
   pnpm,
   prettier,
   regexp,
+  security,
+  sonarjs,
   sortImports,
   sortPackageJson,
   sortPnpmWorkspace,
@@ -28,11 +31,10 @@ import {
   unocss,
   vue,
   yml,
-  sonarjs,
-  security,
   type BaselineOptions,
 } from './configs'
 import { hasUnocss, hasVue } from './env'
+
 import type { ConfigNames } from './typegen'
 import type { Config } from './types'
 import type { Linter } from 'eslint'
@@ -151,9 +153,8 @@ export function frabbit(
   }
   configs.push(specialCases())
 
-  const composer = new FlatConfigComposer<Config, ConfigNames>(
+  return new FlatConfigComposer<Config, ConfigNames>(
     ...configs,
     ...(userConfigs as any)
   )
-  return composer
 }
