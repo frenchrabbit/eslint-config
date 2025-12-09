@@ -15,6 +15,7 @@ import {
   jsdoc,
   jsonc,
   markdown,
+  nestjs,
   node,
   pnpm,
   prettier,
@@ -33,7 +34,7 @@ import {
   yml,
   type BaselineOptions,
 } from './configs'
-import { hasUnocss, hasVue } from './env'
+import { hasNestjs, hasUnocss, hasVue } from './env'
 
 import type { ConfigNames } from './typegen'
 import type { Config } from './types'
@@ -100,6 +101,8 @@ export interface Options {
   command?: boolean
   /** markdown support. @default true */
   markdown?: boolean
+  /** NestJS support. Auto-enable if detected. */
+  nestjs?: boolean
   /** @default false */
   pnpm?: boolean
   /** Prettier support. @default true */
@@ -121,6 +124,7 @@ export function frabbit(
     baseline: enableBaseline = true,
     command: enableCommand = true,
     markdown: enableMarkdown = true,
+    nestjs: enableNestjs = hasNestjs(),
     pnpm: enablePnpm = false,
     prettier: enablePrettier = true,
     unocss: enableUnocss = hasUnocss(),
@@ -135,6 +139,9 @@ export function frabbit(
   }
   if (enableVue) {
     configs.push(vue())
+  }
+  if (enableNestjs) {
+    configs.push(nestjs())
   }
   if (enableMarkdown) {
     configs.push(markdown())

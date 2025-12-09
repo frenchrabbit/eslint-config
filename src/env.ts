@@ -13,6 +13,8 @@ export const hasUnocss = (): boolean =>
   isPackageExists('@unocss/webpack') ||
   isPackageExists('@unocss/nuxt') ||
   isPackageExists('@unocss/eslint-plugin')
+export const hasNestjs = (): boolean =>
+  isPackageExists('@nestjs/core') || isPackageExists('@nestjs/common')
 
 export function isInEditorEnv(): boolean {
   if (process.env.CI) return false

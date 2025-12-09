@@ -86,7 +86,7 @@ export const javascript = (): Config[] => [
       'require-await': 'error',
       'sxzz/prefer-string-function': 'warn',
       'unicode-bom': ['error', 'never'],
-      'unused-imports/no-unused-imports': 'warn',
+      'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'error',
         { args: 'after-used', ignoreRestSiblings: true },
