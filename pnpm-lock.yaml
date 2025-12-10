@@ -15,6 +15,12 @@ catalogs:
     eslint-flat-config-utils:
       specifier: ^2.1.4
       version: 2.1.4
+    eslint-plugin-security:
+      specifier: ^3.0.1
+      version: 3.0.1
+    eslint-plugin-sonarjs:
+      specifier: ^3.0.5
+      version: 3.0.5
     globals:
       specifier: ^16.5.0
       version: 16.5.0
@@ -198,10 +204,10 @@ importers:
         specifier: catalog:plugins
         version: 2.10.0(eslint@9.39.1(jiti@2.6.1))
       eslint-plugin-security:
-        specifier: ^3.0.1
+        specifier: 'catalog:'
         version: 3.0.1
       eslint-plugin-sonarjs:
-        specifier: ^3.0.5
+        specifier: 'catalog:'
         version: 3.0.5(eslint@9.39.1(jiti@2.6.1))
       eslint-plugin-sxzz:
         specifier: catalog:plugins
