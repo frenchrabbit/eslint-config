@@ -109,8 +109,8 @@ export interface Options {
   prettier?: boolean
   /** UnoCSS support. Auto-enable if detected. */
   unocss?: boolean
-  /** Vue support. Auto-enable if detected. */
-  vue?: boolean
+  /** Vue support. Auto-enable if detected. Pass 2 for Vue 2 support. */
+  vue?: boolean | 2
 }
 
 /** `@frabbit`'s preset. */
@@ -138,7 +138,7 @@ export function frabbit(
     )
   }
   if (enableVue) {
-    configs.push(vue())
+    configs.push(vue({ version: enableVue === 2 ? 2 : 3 }))
   }
   if (enableNestjs) {
     configs.push(nestjs())
