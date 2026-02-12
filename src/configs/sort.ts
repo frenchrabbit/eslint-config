@@ -1,5 +1,4 @@
 import { pluginPerfectionist } from '../plugins'
-
 import type { Config } from '../types'
 
 export const sortPackageJson = (): Config[] => [
@@ -266,20 +265,15 @@ export const sortImports = (): Config[] => [
             'builtin',
             'external',
             'internal',
-            'internal-type',
             'parent',
-            'parent-type',
             'sibling',
-            'sibling-type',
             'index',
-            'index-type',
             'object',
-            'type',
             'side-effect',
             'side-effect-style',
           ],
           internalPattern: ['^[~@#]/.*'],
-          newlinesBetween: 'ignore',
+          newlinesBetween: 1,
           type: 'natural',
         },
       ],

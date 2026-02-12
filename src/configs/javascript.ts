@@ -1,7 +1,6 @@
 import globals from 'globals'
 
 import { configJs, pluginSxzz, pluginUnusedImports } from '../plugins'
-
 import type { Config } from '../types'
 
 export const restrictedSyntaxJs: string[] = [
@@ -39,7 +38,8 @@ export const javascript = (): Config[] => [
       'no-alert': 'warn',
       'no-console': ['warn', { allow: ['warn', 'error', 'info', 'clear'] }],
       'no-debugger': 'warn',
-      'no-duplicate-imports': 'error',
+      // Disabled in favor of import/no-duplicates which handles type imports better
+      'no-duplicate-imports': 'off',
       'no-empty': ['error', { allowEmptyCatch: true }],
       'no-fallthrough': [
         'warn',

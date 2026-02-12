@@ -2,9 +2,9 @@ import { defineConfig } from 'eslint/config'
 
 import { GLOB_JS, GLOB_TS, GLOB_TSX } from '../globs'
 import { tseslint } from '../plugins'
-
 import type { Rules } from '../typegen'
 import type { Config } from '../types'
+
 import { restrictedSyntaxJs } from './javascript'
 
 export const typescriptCore: Config[] = defineConfig({
@@ -22,7 +22,7 @@ export const typescriptCore: Config[] = defineConfig({
     ],
     '@typescript-eslint/consistent-type-imports': [
       'error',
-      { disallowTypeAnnotations: false, fixStyle: 'inline-type-imports' },
+      { disallowTypeAnnotations: false, fixStyle: 'separate-type-imports' },
     ],
     '@typescript-eslint/method-signature-style': ['error', 'property'], // https://www.totaltypescript.com/method-shorthand-syntax-considered-harmful
     '@typescript-eslint/no-empty-object-type': 'off',

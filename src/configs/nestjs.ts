@@ -1,4 +1,5 @@
 import { GLOB_TS, GLOB_TSX } from '../globs'
+import { pluginImport } from '../plugins'
 import type { Config } from '../types'
 
 export const nestjs = (): Config[] => [
@@ -11,5 +12,13 @@ export const nestjs = (): Config[] => [
       },
     },
     name: 'frabbit/nestjs',
+    plugins: {
+      import: pluginImport,
+    },
+    rules: {
+      '@typescript-eslint/consistent-type-imports': 'off',
+      '@typescript-eslint/no-import-type-side-effects': 'off',
+      'import/consistent-type-specifier-style': 'off',
+    },
   },
 ]
