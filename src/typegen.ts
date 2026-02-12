@@ -512,6 +512,11 @@ export interface Rules {
    */
   '@typescript-eslint/no-useless-constructor'?: Linter.RuleEntry<[]>
   /**
+   * Disallow default values that will never be used
+   * @see https://typescript-eslint.io/rules/no-useless-default-assignment
+   */
+  '@typescript-eslint/no-useless-default-assignment'?: Linter.RuleEntry<TypescriptEslintNoUselessDefaultAssignment>
+  /**
    * Disallow empty exports that don't change anything in a module file
    * @see https://typescript-eslint.io/rules/no-useless-empty-export
    */
@@ -684,6 +689,11 @@ export interface Rules {
    * @see https://typescript-eslint.io/rules/strict-boolean-expressions
    */
   '@typescript-eslint/strict-boolean-expressions'?: Linter.RuleEntry<TypescriptEslintStrictBooleanExpressions>
+  /**
+   * Disallow passing a value-returning function in a position accepting a void function
+   * @see https://typescript-eslint.io/rules/strict-void-return
+   */
+  '@typescript-eslint/strict-void-return'?: Linter.RuleEntry<TypescriptEslintStrictVoidReturn>
   /**
    * Require switch-case statements to be exhaustive
    * @see https://typescript-eslint.io/rules/switch-exhaustiveness-check
@@ -3353,6 +3363,11 @@ export interface Rules {
    */
   'pnpm/json-valid-catalog'?: Linter.RuleEntry<PnpmJsonValidCatalog>
   /**
+   * Enforce settings in `pnpm-workspace.yaml`
+   * @see https://github.com/antfu/pnpm-workspace-utils/tree/main/packages/eslint-plugin-pnpm/src/rules/yaml/yaml-enforce-settings.test.ts
+   */
+  'pnpm/yaml-enforce-settings'?: Linter.RuleEntry<PnpmYamlEnforceSettings>
+  /**
    * Disallow duplicate catalog items in `pnpm-workspace.yaml`
    * @see https://github.com/antfu/pnpm-workspace-utils/tree/main/packages/eslint-plugin-pnpm/src/rules/yaml/yaml-no-duplicate-catalog-item.test.ts
    */
@@ -4069,7 +4084,7 @@ export interface Rules {
    */
   'sonarjs/aws-iam-public-access'?: Linter.RuleEntry<[]>
   /**
-   * Using unencrypted Elasticsearch domains is security-sensitive
+   * Using unencrypted Opensearch domains is security-sensitive
    * @see https://sonarsource.github.io/rspec/#/rspec/S6308/javascript
    */
   'sonarjs/aws-opensearchservice-domain'?: Linter.RuleEntry<[]>
@@ -4289,6 +4304,11 @@ export interface Rules {
    */
   'sonarjs/duplicates-in-character-class'?: Linter.RuleEntry<[]>
   /**
+   * Templates should not be constructed dynamically
+   * @see https://sonarsource.github.io/rspec/#/rspec/S7790/javascript
+   */
+  'sonarjs/dynamically-constructed-templates'?: Linter.RuleEntry<[]>
+  /**
    * "if ... else if" constructs should end with "else" clauses
    * @see https://sonarsource.github.io/rspec/#/rspec/S126/javascript
    */
@@ -4390,6 +4410,11 @@ export interface Rules {
    * @see https://sonarsource.github.io/rspec/#/rspec/S3531/javascript
    */
   'sonarjs/generator-without-yield'?: Linter.RuleEntry<[]>
+  /**
+   * Credentials should not be hard-coded
+   * @see https://sonarsource.github.io/rspec/#/rspec/S6437/javascript
+   */
+  'sonarjs/hardcoded-secret-signatures'?: Linter.RuleEntry<[]>
   /**
    * Using weak hashing algorithms is security-sensitive
    * @see https://sonarsource.github.io/rspec/#/rspec/S4790/javascript
@@ -4661,12 +4686,12 @@ export interface Rules {
    */
   'sonarjs/no-hardcoded-ip'?: Linter.RuleEntry<[]>
   /**
-   * Hard-coded passwords are security-sensitive
+   * Credentials should not be hard-coded
    * @see https://sonarsource.github.io/rspec/#/rspec/S2068/javascript
    */
   'sonarjs/no-hardcoded-passwords'?: Linter.RuleEntry<SonarjsNoHardcodedPasswords>
   /**
-   * Hard-coded secrets are security-sensitive
+   * Secrets should not be hard-coded
    * @see https://sonarsource.github.io/rspec/#/rspec/S6418/javascript
    */
   'sonarjs/no-hardcoded-secrets'?: Linter.RuleEntry<SonarjsNoHardcodedSecrets>
@@ -5155,6 +5180,11 @@ export interface Rules {
    * @deprecated
    */
   'sonarjs/regular-expr'?: Linter.RuleEntry<[]>
+  /**
+   * Wallet phrases should not be hard-coded
+   * @see https://sonarsource.github.io/rspec/#/rspec/S7639/javascript
+   */
+  'sonarjs/review-blockchain-mnemonic'?: Linter.RuleEntry<[]>
   /**
    * A new session should be created during user authentication
    * @see https://sonarsource.github.io/rspec/#/rspec/S5876/javascript
@@ -6693,6 +6723,11 @@ export interface Rules {
    */
   'vue/no-lifecycle-after-await'?: Linter.RuleEntry<[]>
   /**
+   * disallow object, array, and function literals in template
+   * @see https://eslint.vuejs.org/rules/no-literals-in-template.html
+   */
+  'vue/no-literals-in-template'?: Linter.RuleEntry<[]>
+  /**
    * disallow unnecessary `<template>`
    * @see https://eslint.vuejs.org/rules/no-lone-template.html
    */
@@ -6902,6 +6937,11 @@ export interface Rules {
    * @see https://eslint.vuejs.org/rules/no-undef-components.html
    */
   'vue/no-undef-components'?: Linter.RuleEntry<VueNoUndefComponents>
+  /**
+   * disallow use of undefined custom directives
+   * @see https://eslint.vuejs.org/rules/no-undef-directives.html
+   */
+  'vue/no-undef-directives'?: Linter.RuleEntry<VueNoUndefDirectives>
   /**
    * disallow undefined properties
    * @see https://eslint.vuejs.org/rules/no-undef-properties.html
@@ -8471,6 +8511,11 @@ type TypescriptEslintNoUnusedVars = []|[(("all" | "local") | {
   
   destructuredArrayIgnorePattern?: string
   
+  enableAutofixRemoval?: {
+    
+    imports?: boolean
+  }
+  
   ignoreClassWithStaticInitBlock?: boolean
   
   ignoreRestSiblings?: boolean
@@ -8500,6 +8545,11 @@ type TypescriptEslintNoUseBeforeDefine = []|[("nofunc" | {
   
   variables?: boolean
 })]
+// ----- @typescript-eslint/no-useless-default-assignment -----
+type TypescriptEslintNoUselessDefaultAssignment = []|[{
+  
+  allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing?: boolean
+}]
 // ----- @typescript-eslint/no-var-requires -----
 type TypescriptEslintNoVarRequires = []|[{
   
@@ -8755,6 +8805,11 @@ type TypescriptEslintStrictBooleanExpressions = []|[{
   
   allowString?: boolean
 }]
+// ----- @typescript-eslint/strict-void-return -----
+type TypescriptEslintStrictVoidReturn = []|[{
+  
+  allowReturnAny?: boolean
+}]
 // ----- @typescript-eslint/switch-exhaustiveness-check -----
 type TypescriptEslintSwitchExhaustivenessCheck = []|[{
   
@@ -8827,6 +8882,7 @@ type AntfuConsistentListNewline = []|[{
   ExportNamedDeclaration?: boolean
   FunctionDeclaration?: boolean
   FunctionExpression?: boolean
+  IfStatement?: boolean
   ImportDeclaration?: boolean
   JSONArrayExpression?: boolean
   JSONObjectExpression?: boolean
@@ -9825,6 +9881,8 @@ type JsdocRequireHyphenBeforeParamDescription = []|[("always" | "never")]|[("alw
 }]
 // ----- jsdoc/require-jsdoc -----
 type JsdocRequireJsdoc = []|[{
+  
+  checkAllFunctionExpressions?: boolean
   
   checkConstructors?: boolean
   
@@ -14727,6 +14785,19 @@ type PnpmJsonValidCatalog = []|[{
   
   fields?: unknown[]
 }]
+// ----- pnpm/yaml-enforce-settings -----
+type PnpmYamlEnforceSettings = []|[{
+  
+  autofix?: boolean
+  
+  settings?: {
+    [k: string]: unknown | undefined
+  }
+  
+  requiredFields?: string[]
+  
+  forbiddenFields?: string[]
+}]
 // ----- pnpm/yaml-no-duplicate-catalog-item -----
 type PnpmYamlNoDuplicateCatalogItem = []|[{
   allow?: string[]
@@ -15387,6 +15458,11 @@ type UnusedImportsNoUnusedImports = []|[(("all" | "local") | {
   
   destructuredArrayIgnorePattern?: string
   
+  enableAutofixRemoval?: {
+    
+    imports?: boolean
+  }
+  
   ignoreClassWithStaticInitBlock?: boolean
   
   ignoreRestSiblings?: boolean
@@ -15411,6 +15487,11 @@ type UnusedImportsNoUnusedVars = []|[(("all" | "local") | {
   caughtErrorsIgnorePattern?: string
   
   destructuredArrayIgnorePattern?: string
+  
+  enableAutofixRemoval?: {
+    
+    imports?: boolean
+  }
   
   ignoreClassWithStaticInitBlock?: boolean
   
@@ -16216,6 +16297,7 @@ type VueNoLoneTemplate = []|[{
 // ----- vue/no-multi-spaces -----
 type VueNoMultiSpaces = []|[{
   ignoreProperties?: boolean
+  ignoreEOLComments?: boolean
 }]
 // ----- vue/no-multiple-template-root -----
 type VueNoMultipleTemplateRoot = []|[{
@@ -16375,6 +16457,10 @@ type VueNoTemplateTargetBlank = []|[{
 // ----- vue/no-undef-components -----
 type VueNoUndefComponents = []|[{
   ignorePatterns?: unknown[]
+}]
+// ----- vue/no-undef-directives -----
+type VueNoUndefDirectives = []|[{
+  ignore?: string[]
 }]
 // ----- vue/no-undef-properties -----
 type VueNoUndefProperties = []|[{
