@@ -1,5 +1,4 @@
 import { pluginNode } from '../plugins'
-
 import type { Config } from '../types'
 
 export const node = (): Config[] => [
@@ -15,8 +14,8 @@ export const node = (): Config[] => [
       'node/no-new-require': 'error',
       'node/no-path-concat': 'error',
       'node/no-unsupported-features/es-builtins': 'error',
-      'node/prefer-global/buffer': ['error', 'never'],
-      'node/prefer-global/process': ['error', 'never'],
+      'node/prefer-global/buffer': ['error', 'always'],
+      'node/prefer-global/process': ['error', 'always'],
       'node/process-exit-as-throw': 'error',
     },
   },

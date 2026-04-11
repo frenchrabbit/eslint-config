@@ -990,6 +990,11 @@ export interface Rules {
    */
   'for-direction'?: Linter.RuleEntry<[]>
   /**
+   * Prefer async/dynamic import for components used only inside v-if (or under a v-if parent)
+   * @see https://github.com/frenchrabbit/eslint-config#frabbit-vueprefer-async-import
+   */
+  'frabbit-vue/prefer-async-import'?: Linter.RuleEntry<FrabbitVuePreferAsyncImport>
+  /**
    * Require or disallow spacing between function identifiers and their invocations
    * @see https://eslint.org/docs/latest/rules/func-call-spacing
    * @deprecated
@@ -9059,6 +9064,10 @@ type EolLast = []|[("always" | "never" | "unix" | "windows")]
 type Eqeqeq = ([]|["always"]|["always", {
   null?: ("always" | "never" | "ignore")
 }] | []|[("smart" | "allow-null")])
+// ----- frabbit-vue/prefer-async-import -----
+type FrabbitVuePreferAsyncImport = []|[{
+  version?: (2 | 3)
+}]
 // ----- func-call-spacing -----
 type FuncCallSpacing = ([]|["never"] | []|["always"]|["always", {
   allowNewlines?: boolean

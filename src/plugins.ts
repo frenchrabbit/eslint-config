@@ -24,6 +24,7 @@ import pluginUnusedImports from 'eslint-plugin-unused-imports'
 import pluginVue from 'eslint-plugin-vue'
 import pluginYml from 'eslint-plugin-yml'
 import parserJsonc from 'jsonc-eslint-parser'
+import { pluginFrabbitVue } from './rules'
 import tseslint from 'typescript-eslint'
 import parserVue from 'vue-eslint-parser'
 import parserYml from 'yaml-eslint-parser'
@@ -37,6 +38,7 @@ export {
   parserYml,
   pluginAntfu,
   pluginDeMorgan,
+  pluginFrabbitVue,
   pluginIgnore,
   pluginImport,
   pluginJsdoc,

@@ -1,9 +1,10 @@
-import { GLOB_VUE } from '../globs'
-import { parserVue, pluginVue, tseslint } from '../plugins'
-
-import type { Config } from '../types'
-import { typescriptCore } from './typescript'
 import type { ESLint } from 'eslint'
+
+import { GLOB_VUE } from '../globs'
+import { parserVue, pluginFrabbitVue, pluginVue, tseslint } from '../plugins'
+import type { Config } from '../types'
+
+import { typescriptCore } from './typescript'
 
 export interface VueOptions {
   /** Vue version. @default 3 */
@@ -70,12 +71,14 @@ export const vue = (options: VueOptions = {}): Config[] => {
       name: 'frabbit/vue',
       plugins: {
         '@typescript-eslint': tseslint.plugin as ESLint.Plugin,
+        'frabbit-vue': pluginFrabbitVue,
         vue: pluginVue,
       },
       processor: pluginVue.processors['.vue'],
       rules: {
         ...recommendedRules,
 
+        'frabbit-vue/prefer-async-import': ['warn', { version }],
         'vue/block-order': [
           'error',
           { order: ['script', 'template', 'style'] },
