@@ -14,8 +14,6 @@ import pluginJsonc from 'eslint-plugin-jsonc'
 import pluginNode from 'eslint-plugin-n'
 import pluginPerfectionist from 'eslint-plugin-perfectionist'
 import pluginPnpm from 'eslint-plugin-pnpm'
-import pluginPrettier from 'eslint-plugin-prettier'
-import pluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import pluginSecurity from 'eslint-plugin-security'
 import pluginSonarJS from 'eslint-plugin-sonarjs'
 import pluginSxzz from 'eslint-plugin-sxzz'
@@ -47,8 +45,6 @@ export {
   pluginNode,
   pluginPerfectionist,
   pluginPnpm,
-  pluginPrettier,
-  pluginPrettierRecommended,
   pluginSecurity,
   pluginSonarJS,
   pluginSxzz,
