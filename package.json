@@ -1,7 +1,7 @@
 {
   "name": "@frabbit/eslint-config",
   "type": "module",
-  "version": "7.9.0",
+  "version": "8.0.0",
   "packageManager": "pnpm@10.24.0",
   "description": "ESLint config for @frabbit.",
   "author": "Kevin Deng <sxzz@sxzz.moe>",
@@ -69,7 +69,6 @@
     "eslint-plugin-n": "catalog:plugins",
     "eslint-plugin-perfectionist": "catalog:plugins",
     "eslint-plugin-pnpm": "catalog:plugins",
-    "eslint-plugin-prettier": "catalog:plugins",
     "eslint-plugin-regexp": "catalog:plugins",
     "eslint-plugin-security": "catalog:",
     "eslint-plugin-sonarjs": "catalog:",
