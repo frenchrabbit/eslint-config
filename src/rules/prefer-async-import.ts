@@ -152,7 +152,7 @@ function isInsideConditionalBlock(
     type: string
     parent?: unknown
     startTag?: { attributes?: unknown[] }
-  } | null
+  } | null,
 ): boolean {
   let current: typeof node = node
   while (current && current.type === 'VElement') {
@@ -160,8 +160,8 @@ function isInsideConditionalBlock(
     if (
       attrs.some((a: unknown) =>
         isConditionalDirective(
-          a as Parameters<typeof isConditionalDirective>[0]
-        )
+          a as Parameters<typeof isConditionalDirective>[0],
+        ),
       )
     )
       return true
@@ -196,7 +196,7 @@ function isDefineAsyncComponentUsage(
     type?: string
     callee?: { name?: string }
     arguments?: unknown[]
-  }
+  },
 ): boolean {
   if (node.type !== 'CallExpression') return false
   const callee = node.callee as { name?: string } | undefined
@@ -212,7 +212,7 @@ export const preferAsyncImport: Rule.RuleModule = {
     const sourceCode =
       context.sourceCode ??
       (
-        context as {
+        context as unknown as {
           getSourceCode: () => {
             parserServices?: { defineTemplateBodyVisitor?: unknown }
           }
@@ -229,7 +229,7 @@ export const preferAsyncImport: Rule.RuleModule = {
       parserServices?.defineTemplateBodyVisitor as
         | ((
             templateVisitor: Record<string, (node: unknown) => void>,
-            scriptVisitor?: Record<string, (node: unknown) => void>
+            scriptVisitor?: Record<string, (node: unknown) => void>,
           ) => Record<string, (node: unknown) => void>)
         | undefined
 
@@ -249,7 +249,7 @@ export const preferAsyncImport: Rule.RuleModule = {
         if (!isComponentTag(name)) return
         const kebab = toKebabCase(name)
         const conditional = isInsideConditionalBlock(
-          el as Parameters<typeof isInsideConditionalBlock>[0]
+          el as Parameters<typeof isInsideConditionalBlock>[0],
         )
         if (conditional) conditionalComponents.add(kebab)
         else unconditionalComponents.add(kebab)
@@ -265,7 +265,7 @@ export const preferAsyncImport: Rule.RuleModule = {
         const specifiers = n.specifiers ?? []
         for (const spec of specifiers) {
           const localName = getImportedName(
-            spec as Parameters<typeof getImportedName>[0]
+            spec as Parameters<typeof getImportedName>[0],
           )
           if (!localName) continue
           const kebab = toKebabCase(localName)
@@ -291,8 +291,7 @@ export const preferAsyncImport: Rule.RuleModule = {
           | undefined
         if (parent?.type !== 'ObjectExpression') return
         const grandparent = parent.parent as
-          | { type?: string; key?: { name?: string } }
-          | undefined
+          { type?: string; key?: { name?: string } } | undefined
         if (
           grandparent?.type !== 'Property' ||
           grandparent.key?.name !== 'components'
@@ -301,8 +300,7 @@ export const preferAsyncImport: Rule.RuleModule = {
         const keyName = (n.key as { name?: string })?.name
         if (!keyName) return
         const value = n.value as
-          | { type?: string; callee?: { name?: string } }
-          | undefined
+          { type?: string; callee?: { name?: string } } | undefined
         if (!value) return
         const isAsync =
           value.type === 'ArrowFunctionExpression' ||
@@ -317,7 +315,7 @@ export const preferAsyncImport: Rule.RuleModule = {
         if (!id?.name || !init) return
         if (
           !isDefineAsyncComponentUsage(
-            init as Parameters<typeof isDefineAsyncComponentUsage>[0]
+            init as Parameters<typeof isDefineAsyncComponentUsage>[0],
           )
         )
           return

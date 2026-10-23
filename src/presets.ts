@@ -1,8 +1,6 @@
-import {
-  FlatConfigComposer,
-  type Arrayable,
-  type Awaitable,
-} from 'eslint-flat-config-utils'
+import type { Linter } from 'eslint'
+import { FlatConfigComposer } from 'eslint-flat-config-utils'
+import type { Arrayable, Awaitable } from 'eslint-flat-config-utils'
 
 import {
   baseline,
@@ -32,13 +30,11 @@ import {
   unocss,
   vue,
   yml,
-  type BaselineOptions,
 } from './configs'
+import type { BaselineOptions } from './configs'
 import { hasNestjs, hasUnocss, hasVue } from './env'
-
 import type { ConfigNames } from './typegen'
 import type { Config } from './types'
-import type { Linter } from 'eslint'
 
 /** Ignore common files and include javascript support */
 export const presetJavaScript = (): Config[] => [
@@ -134,7 +130,7 @@ export function frabbit(
   const configs: Awaitable<Config[]>[] = [presetBasic(), yml(), presetJsonc()]
   if (enableBaseline) {
     configs.push(
-      baseline(typeof enableBaseline === 'object' ? enableBaseline : {})
+      baseline(typeof enableBaseline === 'object' ? enableBaseline : {}),
     )
   }
   if (enableVue) {
@@ -162,6 +158,6 @@ export function frabbit(
 
   return new FlatConfigComposer<Config, ConfigNames>(
     ...configs,
-    ...(userConfigs as any)
+    ...(userConfigs as any),
   )
 }

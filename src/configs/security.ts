@@ -1,5 +1,4 @@
 import { pluginSecurity } from '../plugins'
-
 import type { Config } from '../types'
 
 export const security = (): Config[] => [

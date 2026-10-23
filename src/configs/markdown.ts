@@ -1,15 +1,12 @@
 import { GLOB_MARKDOWN, GLOB_SRC, GLOB_VUE } from '../globs'
 import { pluginMarkdown } from '../plugins'
-
 import type { Config } from '../types'
 
 export const markdown = (): Config[] => [
-  ...pluginMarkdown.configs.processor.map(
-    (config): Config => ({
-      ...(config as Config),
-      name: `frabbit/${config.name || 'anonymous'}`,
-    })
-  ),
+  ...pluginMarkdown.configs.processor.map((config): Config => ({
+    ...(config as Config),
+    name: `frabbit/${config.name || 'anonymous'}`,
+  })),
 
   {
     files: [`${GLOB_MARKDOWN}/${GLOB_SRC}`, `${GLOB_MARKDOWN}/${GLOB_VUE}`],

@@ -1,6 +1,7 @@
-import { frabbit, type Config, type ConfigNames } from './src'
-
 import type { FlatConfigComposer } from 'eslint-flat-config-utils'
+
+import { frabbit } from './src'
+import type { Config, ConfigNames } from './src'
 
 const _default: FlatConfigComposer<Config, ConfigNames> = frabbit({
   vue: true,
@@ -21,6 +22,16 @@ const _default: FlatConfigComposer<Config, ConfigNames> = frabbit({
   },
   {
     ignores: ['src/typegen.ts'],
-  }
+  },
+  {
+    rules: {
+      'unicorn/no-top-level-side-effects': 'off',
+      'node/prefer-global/process': 'off',
+    },
+  },
+  {
+    files: ['scripts/**/*.ts'],
+    rules: { 'baseline-js/use-baseline': 'off' },
+  },
 )
 export default _default

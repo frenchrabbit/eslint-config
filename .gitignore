@@ -5,3 +5,5 @@ dist
 *.log
 .eslint-config-inspector
 .vercel
+
+.pnpm-store/

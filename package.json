@@ -19,8 +19,6 @@
     ".": "./dist/index.mjs",
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "files": [
     "dist"
@@ -29,7 +27,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": "^22.18.0 || ^24.11.0 || >=26.0.0"
   },
   "scripts": {
     "dev": "eslint-config-inspector --config eslint-inspector.config.ts",
@@ -45,7 +43,7 @@
   },
   "peerDependencies": {
     "@unocss/eslint-plugin": ">=65.0.0",
-    "eslint": "^9.5.0"
+    "eslint": "^10.0.0"
   },
   "peerDependenciesMeta": {
     "@unocss/eslint-plugin": {
@@ -90,7 +88,7 @@
     "@types/node": "catalog:dev",
     "@typescript/native-preview": "catalog:dev",
     "@unocss/eslint-plugin": "catalog:plugins",
-    "baseline-browser-mapping": "^2.9.19",
+    "baseline-browser-mapping": "catalog:",
     "bumpp": "catalog:dev",
     "eslint": "catalog:",
     "eslint-typegen": "catalog:dev",

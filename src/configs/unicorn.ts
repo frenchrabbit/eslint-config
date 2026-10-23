@@ -1,5 +1,4 @@
 import { pluginUnicorn } from '../plugins'
-
 import type { Config } from '../types'
 
 export const unicorn = (): Config[] => [

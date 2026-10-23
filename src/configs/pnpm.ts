@@ -1,5 +1,4 @@
 import { pluginPnpm } from '../plugins'
-
 import type { Config } from '../types'
 
 export async function pnpm(): Promise<Config[]> {

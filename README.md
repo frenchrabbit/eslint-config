@@ -75,3 +75,9 @@ Most of the rules are the same, but there are some differences:
 - Use [Prettier](https://prettier.io/) instead of [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic).
 - React and Svelte are not supported.
 - Maybe stricter and simpler.
+
+## TypeScript compatibility
+
+Requires ESLint 10 and Node.js ^22.18.0, ^24.11.0, or >=26.0.0.
+The current typescript-eslint 8.72 supports TypeScript >=4.8.4 <6.1.0.
+Use TypeScript 6.0.x for linting; TypeScript 7 is not yet supported upstream.

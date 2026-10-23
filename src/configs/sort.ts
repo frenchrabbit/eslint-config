@@ -268,7 +268,6 @@ export const sortImports = (): Config[] => [
             'parent',
             'sibling',
             'index',
-            'object',
             'side-effect',
             'side-effect-style',
           ],
@@ -279,11 +278,11 @@ export const sortImports = (): Config[] => [
       ],
       'perfectionist/sort-named-exports': [
         'warn',
-        { groupKind: 'values-first', type: 'natural' },
+        { groups: ['value-export', 'type-export'], type: 'natural' },
       ],
       'perfectionist/sort-named-imports': [
         'warn',
-        { groupKind: 'values-first', type: 'natural' },
+        { groups: ['value-import', 'type-import'], type: 'natural' },
       ],
     },
   },

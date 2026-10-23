@@ -1,5 +1,4 @@
 import { configComments } from '../plugins'
-
 import type { Config } from '../types'
 
 export const comments = (): Config[] => [

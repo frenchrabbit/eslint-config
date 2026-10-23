@@ -1,5 +1,4 @@
 import { pluginSonarJS } from '../plugins'
-
 import type { Config } from '../types'
 
 export const sonarjs = (): Config[] => [

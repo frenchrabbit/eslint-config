@@ -1,8 +1,8 @@
+import type { Linter } from 'eslint'
+
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs'
 import { parserJsonc, pluginJsonc } from '../plugins'
-
 import type { Config } from '../types'
-import type { Linter } from 'eslint'
 
 export const jsonc = (): Config[] => [
   {
@@ -15,8 +15,12 @@ export const jsonc = (): Config[] => [
       jsonc: pluginJsonc as any,
     },
     rules: {
-      ...(pluginJsonc.configs['recommended-with-jsonc']
-        .rules as Linter.RulesRecord),
+      ...(Object.assign(
+        {},
+        ...pluginJsonc.configs['recommended-with-jsonc'].map(
+          (config) => config.rules,
+        ),
+      ) as Linter.RulesRecord),
       'jsonc/quote-props': 'off',
       'jsonc/quotes': 'off',
     },

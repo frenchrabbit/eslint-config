@@ -6,7 +6,6 @@ import {
   GLOB_TSX,
 } from '../globs'
 import { pluginImport } from '../plugins'
-
 import type { Config } from '../types'
 
 export const specialCases = (): Config[] => [
